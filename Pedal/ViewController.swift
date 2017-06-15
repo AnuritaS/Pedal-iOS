@@ -9,22 +9,47 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftValidator
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,UITextFieldDelegate {
 
-   
+    let validator = Validator()
     @IBOutlet weak var phNumber: UITextField!
+    @IBOutlet weak var phNumberErrorLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        validator.registerField(phNumber, errorLabel: phNumberErrorLabel, rules: [RequiredRule(),MinLengthRule(length:9)])
+                phNumber.delegate = self
+       
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        var pass : Bool = false
+        validator.validateField(textField){ error in
+            if error == nil {
+                // Field validation was successful
+                error?.errorLabel?.isHidden = false
+                pass = true
+            } else {
+                // Validation error occurred
+                print("nope")
+                error?.errorLabel?.text = error?.errorMessage
+                error?.errorLabel?.isHidden = false
+            }
+        }
+        return pass
+    }
+
    
 
     @IBAction func sendPressed(_ sender: Any) {
-        self.getID(phNumber.text!)
-    }
+        if textFieldShouldReturn(textField: phNumber){
+              self.getID(phNumber.text!)
+        }
     
+    }
     
 } //9962701152
 
