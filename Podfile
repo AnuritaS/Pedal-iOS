@@ -7,6 +7,8 @@ target 'Pedal' do
  pod 'Alamofire', '~> 4.4'
  pod 'SwiftyJSON'
  pod 'SwiftValidator', :git => 'https://github.com/jpotts18/SwiftValidator.git', :branch => 'master'
+ pod 'Fabric'
+ pod 'Crashlytics'
 # Pods for Pedal
 
 end
