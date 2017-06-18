@@ -120,17 +120,53 @@
                                     <action selector="resendPressed:" destination="W3x-7l-i9I" eventType="touchUpInside" id="S4f-45-RUP"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goG-iB-Of0">
+                                <rect key="frame" x="0.0" y="487" width="375" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.23906895535812411" blue="0.098674645961504548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="otp" destination="BSd-fq-7cK" id="fNH-BB-85J"/>
                         <outlet property="otpErrorLabel" destination="J7t-Lv-eYL" id="WPI-9R-9R8"/>
+                        <outlet property="resendOTP" destination="B9w-GX-Kcj" id="TQf-jf-kqt"/>
+                        <outlet property="wrongOTP" destination="goG-iB-Of0" id="L6v-yi-O7H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EKI-sP-V9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="284" y="876.61169415292363"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="4lT-g3-8mv">
+            <objects>
+                <viewController storyboardIdentifier="home" id="MmD-nN-rhV" customClass="HomeViewController" customModule="Pedal" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WrH-kt-mwQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="9i5-Bu-6Rt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BEf-so-twV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welome to Pedal App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJP-IA-vMo">
+                                <rect key="frame" x="0.0" y="134" width="375" height="143"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <color key="textColor" red="0.28561426805244783" green="0.38768790298683664" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DiH-LK-BtF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1244" y="871.21439280359823"/>
         </scene>
         <!--Log In View Controller-->
         <scene sceneID="O3X-z5-f5G">

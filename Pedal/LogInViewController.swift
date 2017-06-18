@@ -23,18 +23,20 @@ class LogInViewController: UIViewController,ValidationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // register field for validation
         validator.registerField(password, errorLabel: passwordErrorLabel, rules: [RequiredRule(),MinLengthRule(length:6)])
         
     }
     
-    
+    //if inputs are correct
     func validationSuccessful() {
         // submit the form
         passwordErrorLabel.isHidden = true
-        checkLogin(password.text!)
+        //pass password entered to /login
+        checkLogin(userID,password.text!)
     }
     
+    //if inputs are incorrect
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         // turn the fields to red
         for (field, error) in validator.errors {
@@ -43,22 +45,29 @@ class LogInViewController: UIViewController,ValidationDelegate {
         }
     }
     
+    //check if inputs are correct
     @IBAction func sendPressed(_ sender: Any) {
         validator.validate(self)
         
     }
+}
 
-    func checkLogin(_ sender: String) {
+extension LogInViewController{
+    
+    func checkLogin(_ userId: String,_ password: String) {
+        
         let parameters : Parameters = [
-                "userId" :  userID,
-                "password" : sender
+                "userId" :  userId,
+                "password" : password
         ]
+        
+        //send request to /login to check credentials
         Alamofire.request("http://52.163.120.124:8080/auth/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
         
-        print(response.request)  // original URL request
+        print(response.request!)  // original URL request
+            
+            //for later use
         if response.data != nil{
-            
-            
             let JsonData = JSON(response.data!)
             
             guard let user = JsonData["user"].dictionary else{
@@ -79,14 +88,15 @@ class LogInViewController: UIViewController,ValidationDelegate {
                 print(JsonData["token"])
                 return
             }
-            print(userId)
-            print(token)
-print("welcome to home")
-
-        }
-        
+            
+            
+            /*var controller : HomeViewController
+            controller = self.storyboard?.instantiateViewController(withIdentifier: "home") as! HomeViewController
+            self.present(controller, animated: true, completion: nil)*/
+            print("Pass to Home")
+            
+            }
         }
     }
-
 
 }

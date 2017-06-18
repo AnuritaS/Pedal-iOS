@@ -42,7 +42,9 @@ class SignUpViewController: UIViewController,ValidationDelegate {
     @IBOutlet weak var passwordErrorLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        //register fields for validation
+        
        /* validator.registerField(name, errorLabel: nameErrorLabel, rules: [RequiredRule()])
         validator.registerField(lName, errorLabel: lNameErrorLabel, rules: [RequiredRule()])
         validator.registerField(phNumber, errorLabel: phNumberErrorLabel, rules: [RequiredRule(),MinLengthRule(length:9)])
@@ -60,28 +62,17 @@ class SignUpViewController: UIViewController,ValidationDelegate {
         validator.unregisterField(lName)*/
     }
     
-    
+      //if inputs are correct
     func validationSuccessful() {
         // submit the form
-       /* nameErrorLabel.isHidden = true
-        lNameErrorLabel.isHidden = true
-       phNumberErrorLabel.isHidden = true
-        genderErrorLabel.isHidden = true
-        birthdateErrorLabel.isHidden = true
-        aadharErrorLabel.isHidden = true
-        emailErrorLabel.isHidden = true
-        streetErrorLabel.isHidden = true
-        cityErrorLabel.isHidden = true
-        stateErrorLabel.isHidden = true
-        pincodeErrorLabel.isHidden = true
-        passwordErrorLabel.isHidden = true */
-     
-        var date = birthdate.date.timeIntervalSince1970
-        userDetails(name.text!,lName.text!,phNumber.text!,gender.text!,date,aadhar.text!,email.text!,street.text!,city.text!,state.text!,pincode.text!,password.text!)
+        var date = birthdate.date.timeIntervalSince1970  //change date to unix epoch
         
-        print(date)
+  //pass user details entered to /signup
+        userDetails(name.text!,lName.text!,phNumber.text!,gender.text!,date,aadhar.text!,email.text!,street.text!,city.text!,state.text!,pincode.text!,password.text!)
+
     }
     
+      //if inputs are incorrect
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         // turn the fields to red
         for (field, error) in validator.errors {
@@ -90,12 +81,18 @@ class SignUpViewController: UIViewController,ValidationDelegate {
         }
     }
     
+      //check if inputs are correct
     @IBAction func sendPressed(_ sender: Any) {
         validator.validate(self)
         
     }
     
+}
+
+extension SignUpViewController{
+    
     func userDetails(_ name: String,_ lName: String,_ phNumber: String,_ gender: String,_ birthdate: TimeInterval,_ aadhar: String,_ email: String,_ street: String,_ city: String,_ state: String,_ pincode: String,_ password: String) {
+        
         let parameters : Parameters = [
             "user":[
             "firstName" :  name,
@@ -114,15 +111,17 @@ class SignUpViewController: UIViewController,ValidationDelegate {
             ],
             "password" : password
         ]
+        
+        //send request to /signup to register user
         Alamofire.request("http://52.163.120.124:8080/auth/signup", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON{ response in
             
-            print(response.request)  // original URL request
+            print(response.request!)  // original URL request
            
             switch response.result{
             case .success(let value):
-                print("OTP")
                 let JsonData = JSON(value)
                 
+                //for later use
                 guard let userId = JsonData["userId"].string else{
                     print(JsonData["userId"])
                     return
@@ -136,20 +135,26 @@ class SignUpViewController: UIViewController,ValidationDelegate {
                     print(JsonData["verified"])
                     return
                 }
-                if verified{
+                
+                //if user is registered but not verified, go to verification
+                if verified == false{
                 let controller : OTPViewController
                 controller = self.storyboard?.instantiateViewController(withIdentifier: "otp") as! OTPViewController
-controller.userID = userId
+                    
+                    //pass userId and password for verification
+                    controller.userID = userId
                     controller.password = password
                     self.present(controller, animated: true, completion: nil)
-                }else{
+                }
+                else{
                     print("cannot signup user")
                 }
+                
+                //user is already registered
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
+               
             }
         }
     }
-    
-    
 }

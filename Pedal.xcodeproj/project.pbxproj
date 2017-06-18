@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4648A7BAB8FC265F1D2BB19F /* Pods_Pedal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ED2BDC90B3DE283ADAD1C9B /* Pods_Pedal.framework */; };
 		DF18F4EF1EF6B92B00FD1969 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF18F4EE1EF6B92B00FD1969 /* OTPViewController.swift */; };
+		DF18F4F11EF6C5D000FD1969 /* Check.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF18F4F01EF6C5D000FD1969 /* Check.swift */; };
+		DF18F4F31EF6C86100FD1969 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF18F4F21EF6C86100FD1969 /* HomeViewController.swift */; };
 		DF1CB8491EEC41C300FF8882 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1CB8481EEC41C300FF8882 /* AppDelegate.swift */; };
 		DF1CB84B1EEC41C300FF8882 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1CB84A1EEC41C300FF8882 /* ViewController.swift */; };
 		DF1CB84E1EEC41C300FF8882 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF1CB84C1EEC41C300FF8882 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 		2084426F8108F1D0A394CC5E /* Pods-Pedal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pedal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pedal/Pods-Pedal.release.xcconfig"; sourceTree = "<group>"; };
 		2ED2BDC90B3DE283ADAD1C9B /* Pods_Pedal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pedal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF18F4EE1EF6B92B00FD1969 /* OTPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
+		DF18F4F01EF6C5D000FD1969 /* Check.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Check.swift; sourceTree = "<group>"; };
+		DF18F4F21EF6C86100FD1969 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DF1CB8451EEC41C300FF8882 /* Pedal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pedal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF1CB8481EEC41C300FF8882 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF1CB84A1EEC41C300FF8882 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,7 +112,9 @@
 				DF1CB86A1EF2EDE600FF8882 /* LogInViewController.swift */,
 				DF1CB86F1EF5C37900FF8882 /* SignUpViewController.swift */,
 				DF18F4EE1EF6B92B00FD1969 /* OTPViewController.swift */,
+				DF18F4F01EF6C5D000FD1969 /* Check.swift */,
 				DF1CB84C1EEC41C300FF8882 /* Main.storyboard */,
+				DF18F4F21EF6C86100FD1969 /* HomeViewController.swift */,
 				DF1CB84F1EEC41C300FF8882 /* Assets.xcassets */,
 				DF1CB85A1EED463B00FF8882 /* Podfile */,
 				DF1CB8511EEC41C300FF8882 /* LaunchScreen.storyboard */,
@@ -259,8 +265,10 @@
 			files = (
 				DF18F4EF1EF6B92B00FD1969 /* OTPViewController.swift in Sources */,
 				DF1CB84B1EEC41C300FF8882 /* ViewController.swift in Sources */,
+				DF18F4F11EF6C5D000FD1969 /* Check.swift in Sources */,
 				DF1CB8491EEC41C300FF8882 /* AppDelegate.swift in Sources */,
 				DF1CB8701EF5C37900FF8882 /* SignUpViewController.swift in Sources */,
+				DF18F4F31EF6C86100FD1969 /* HomeViewController.swift in Sources */,
 				DF1CB86B1EF2EDE600FF8882 /* LogInViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

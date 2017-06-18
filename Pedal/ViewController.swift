@@ -21,18 +21,20 @@ class ViewController: UIViewController,ValidationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //register field for validation
         validator.registerField(phNumber, errorLabel: phNumberErrorLabel, rules: [RequiredRule(),MinLengthRule(length:10)])
        
     }
     
-    
+    //if inputs are correct
     func validationSuccessful() {
         // submit the form
          phNumberErrorLabel.isHidden = true
+        //pass phone number entered to /query
          self.getID(phNumber.text!)
     }
     
+    //if inputs are incorrect
     func validationFailed(_ errors: [(Validatable, ValidationError)]) {
         // turn the fields to red
         for (field, error) in validator.errors {
@@ -41,32 +43,23 @@ class ViewController: UIViewController,ValidationDelegate {
         }
     }
 
+    //check if inputs are correct
     @IBAction func sendPressed(_ sender: Any) {
         validator.validate(self)
        
     }
     
-} //9962701152
+} 
 
 extension ViewController{
     
     func getID(_ phNumber : String){
+        
+        //send request to /query to check phone number
         Alamofire.request("http://52.163.120.124:8080/auth/query?phoneNumber=\(phNumber)").responseJSON{response in
-            print(response.request)  // original URL request
-                 /* if response.data != nil{
-                    
-                 
-            let JsonData = JSON(response.data!)
-                   
-                    guard let verify = JsonData["verified"].bool else{
-                        self.showError("\(JsonData["verified"])")
-                        return
-                    }
-                    
-                    guard let id = JsonData["userId"].string else{
-                         self.showError("\(JsonData["userId"])")
-                        return
-                    }*/
+            
+            print(response.request!) // original URL request
+            
             switch response.result{
             case .success(let value):
                 let JsonData = JSON(value)
@@ -80,32 +73,38 @@ extension ViewController{
                     print(JsonData["userId"])
                     return
             }
-                print(id)
+                //if user is present and verified, go to login
                 if verify{
-                    let controller : LogInViewController
                     
+                    let controller : LogInViewController
                     controller = self.storyboard?.instantiateViewController(withIdentifier: "login") as! LogInViewController
                     controller.userID = id
                     self.present(controller, animated: true, completion: nil)
                     print("Pass to LogIn")
-                }else{
+                    
+                }//if user is present but not verified, verify user
+                else{
+                    
                     let controller : OTPViewController
                     controller = self.storyboard?.instantiateViewController(withIdentifier: "otp") as! OTPViewController
                     controller.userID = id
                     self.present(controller, animated: true, completion: nil)
+                    print("Pass to Verification")
                 }
+                
+                //if user is not present, go to signup
             case .failure(let error):
+                print(error.localizedDescription)
+                
                 let controller : SignUpViewController
                 controller = self.storyboard?.instantiateViewController(withIdentifier: "signup") as! SignUpViewController
-                // controller.phNumber.text = phNumber
+                // controller.phNumber.text = phNumber to autofill phone number
                 self.present(controller, animated: true, completion: nil)
                 print("Pass to SignUp")
-                print(error)
                 
         }
-    }
-}
-   
+     }
+  }
 }
 
 
